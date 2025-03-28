@@ -7,21 +7,21 @@
 using namespace std;
 
 vector<pair<int, int>> phi(int n) {
-	vector<pair<int, int>> factors;
-	for (int i=2; i*i<=n; ++i) {
-		if (n % i == 0) {
+    vector<pair<int, int>> factors;
+    for (int i=2; i*i<=n; ++i) {
+        if (n % i == 0) {
             int cnt = 0;
-			while (n % i == 0) {
-				n /= i;
+            while (n % i == 0) {
+                n /= i;
                 cnt++;
             }
             factors.push_back({i, cnt});
-		}
+        }
     }
-	if (n > 1) {
+    if (n > 1) {
         factors.push_back({n, 1});
     }
-	return factors;
+    return factors;
 }
 
 int main() {
@@ -29,7 +29,7 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     cout << "====================================" << endl;
     cout << "Автор:  Борисов Данила Александрович" << endl; // Борисов Данила Александрович
-    cout << "Группа: 090304-РПИа-o24" << endl;              // 090304-РПИа-o24
+    cout << "Группа: РПИа-090304-o24" << endl;              // РПИа-090304-o24
     cout << "====================================" << endl;
 
     int A, B = 0;
