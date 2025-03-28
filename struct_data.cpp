@@ -1,9 +1,28 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <cmath>
-#include <limits.h>
 #include <windows.h>
 
 using namespace std;
+
+vector<pair<int, int>> phi(int n) {
+	vector<pair<int, int>> factors;
+	for (int i=2; i*i<=n; ++i) {
+		if (n % i == 0) {
+            int cnt = 0;
+			while (n % i == 0) {
+				n /= i;
+                cnt++;
+            }
+            factors.push_back({i, cnt});
+		}
+    }
+	if (n > 1) {
+        factors.push_back({n, 1});
+    }
+	return factors;
+}
 
 int main() {
     SetConsoleCP(CP_UTF8);
@@ -13,31 +32,33 @@ int main() {
     cout << "Группа: РПИа-090304-o24" << endl;              // РПИа-090304-o24
     cout << "====================================" << endl;
 
-
-    int A, B, i = 0;
+    int A, B = 0;
     cout << "Enter the first number: ";
     cin >> A;
     cout << "Enter the second number: ";
     cin >> B;
 
-    if (2 > A || 2e9 < A || 2 > B || 2e9 < B) {
-        cout << "Invalid input. Please enter numbers from 2 to 2 * 10^9";
-        cin >> i;
-        return -1;
+    auto factorsA = phi(A);
+    auto factorsB = phi(B);
+
+    int answer = 0;
+
+    for (auto [p, alpha] : factorsA) {
+        int beta = 0;
+        for (auto [p_b, cnt_b] : factorsB) {
+            if (p_b == p) {
+                beta = cnt_b;
+                break;
+            }
+        }
+        if (beta == 0) {
+            cout << -1 << endl;
+            return 0;
+        }
+        int n = (alpha + beta - 1) / beta;
+        answer = max(answer, n);
     }
 
-    unsigned long long res = 1, max = ULLONG_MAX;
-    for (; res != 0 && i < 64; i++) {
-        if (res * B > max) {
-            cout << "Number overflow" << endl;
-            cout << "Answer is -1" << endl;
-            cin >> i;
-            return -1;
-        }
-        res = (res * B) % A;
-    }
-    i = i == 64 ? -1 : i;
-    cout << "Answer is " << i << endl;
-    cin >> i;
+    cout << "Answer is: " << answer << endl;
     return 0;
 }
