@@ -100,6 +100,11 @@ def knight_moves_library(start, end):
 
 def main():
 
+    print("======================================")
+    print("Выполнил: Борисов Данила Александрович")
+    print("Группа:   090304-РПИа-o24")
+    print("======================================")
+
     start, end = "A5", "C2"
 
     print(knight_moves_array(start, end))
