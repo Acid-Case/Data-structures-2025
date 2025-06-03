@@ -28,6 +28,11 @@ def can_assembled(source_word: str, target_word: str) -> bool:
 
 def main():
 
+    print("======================================")
+    print("Выполнил: Борисов Данила Александрович")
+    print("Группа:   090304-РПИа-o24")
+    print("======================================")
+
     PATH = "nouns.txt"
     WORDS = ["обороноспособность", "агат", "метель", "превысокомногорассмотрительствующий"]
     WORDS = list(map(lambda x: x.lower(), WORDS))
